@@ -30,7 +30,7 @@ void inserirNo(Arvore *r, No *no, int compare(void**, void**)) {
 void imprimirEmOrdem(No *raiz) {
     if(raiz != NULL) {
         imprimirEmOrdem(raiz->esq);
-        printf("%c ", *(char*)raiz->chave);
+        printf("%c ", *(char*)raiz->chave); // Pode ser alterado para imprimir valores de outros tipos além de char. 
         imprimirEmOrdem(raiz->dir);
     }
 }
