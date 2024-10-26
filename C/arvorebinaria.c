@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "arvorebinaria.h"
 
+// Função para inserir elementos da árvore
 void inserirNo(Arvore *r, No *no, int compare(void**, void**)) {
     No* current = r->raiz;
     No* pai = current;
@@ -25,6 +26,7 @@ void inserirNo(Arvore *r, No *no, int compare(void**, void**)) {
         pai->esq = no;
 }
 
+// Função para imprimir os elementos da árvore 'em-ordem'
 void imprimirEmOrdem(No *raiz) {
     if(raiz != NULL) {
         imprimirEmOrdem(raiz->esq);
@@ -43,6 +45,7 @@ No* criarNo(void *valor) {
     return no;
 }
 
+// Função para inicializar a estrutura de dados
 Arvore* criarArvore() {
     Arvore *arvore = (Arvore*)malloc(sizeof(Arvore));
 
