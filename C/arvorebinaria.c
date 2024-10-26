@@ -35,6 +35,7 @@ void imprimirEmOrdem(No *raiz) {
     }
 }
 
+// Cria 'Nós' que armazenam valores de qualquer tipo
 No* criarNo(void *valor) {
     No *no = (No*)malloc(sizeof(No));
 
