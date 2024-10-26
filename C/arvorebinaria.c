@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "arvorebinaria.h"
 
-// Função para inserir elementos da árvore
+// Função para inserir elementos na árvore
 void inserirNo(Arvore *r, No *no, int compare(void**, void**)) {
     No* current = r->raiz;
     No* pai = current;
