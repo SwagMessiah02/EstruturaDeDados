@@ -4,9 +4,8 @@
 #define LENGTH(v) sizeof(v)/sizeof(v[0])
 
 const int vetor_1[5] = {1,0,5,3,2};
-   const char vetor_2[5] = {'d','b','e','f','a'};
-   const char* vetor_3[4] = {"Okarun", "Momo", "JiJi", "Vovó Turbo"};
-
+const char vetor_2[5] = {'d','b','e','f','a'};
+const char* vetor_3[4] = {"Okarun", "Momo", "JiJi", "Vovó Turbo"};
 const int length = LENGTH(vetor_1);
 
 int main(void)
