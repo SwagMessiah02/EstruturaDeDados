@@ -1,5 +1,5 @@
 
-## <p align="center"> Implementação da estrutura de dados arvore binaria </p> 
+## <p align="center"> Implementação da estrutura de dados árvore binária </p> 
 
 Este projeto oferece uma implementação da estrutura de dados arvore binária em linguagem C.
 A referida implementação baseia-se em uma adaptação dos algoritmos apresentados em pseudocódigo no livro
