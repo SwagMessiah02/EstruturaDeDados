@@ -11,7 +11,7 @@ int main(void)
    const char vetor_2[5] = {'d','b','e','f','a'};
    const char* vetor_3[3] = {"Vinicius", "Mendes", "Pedro"};
 
-   const int length = LENGTH(vetor_1); // sizeof(vetor_1[0]) / sizeof(int);
+   const int length = LENGTH(vetor_1); 
 
    for (int i = 0; i < length; i++) {
       insere(arvore, criar_folha(&vetor_1[i]), INT);
