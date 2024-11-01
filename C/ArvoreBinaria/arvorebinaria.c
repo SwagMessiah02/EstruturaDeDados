@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "arvorebinaria.h"
 
-void insere(Arvore *r, No *no, const int compare(const void **, const void **))
+void insere(Arvore *r, No *no, const int compare(const void **, const void **)) 
 {
     No *current = r->raiz;
     No *pai = current;
