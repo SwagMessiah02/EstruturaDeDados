@@ -55,16 +55,3 @@ Arvore* criar_arvore()
     return arvore;
 }
 
-/*
-int comp_string(const char *a, const char *b)
-{
-    const double v1 = atof(a), v2 = atof(b);
-
-    if(v1 < v2)
-        return 1;
-    else if(v1 > v2)
-        return -1;
-    else
-        return 0;
-}
-*/
