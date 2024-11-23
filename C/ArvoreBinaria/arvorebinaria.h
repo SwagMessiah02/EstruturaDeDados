@@ -1,21 +1,21 @@
-#ifndef ARVOREBINARIA_H
-#define ARVOREBINARIA_H
+#ifndef ARVOREBINARIA_H_INCLUDED
+#define ARVOREBINARIA_H_INCLUDED
 
-#include "comparators.h"
+#include "comparadores.h"
 #include "printers.h"
 
-#define STRING comp_string
-#define INT comp_int
-#define CHAR comp_char
+#define STRING (int (*)(void **, void **))comp_string
+#define INT (int (*)(void **, void **))comp_int
+#define CHAR (int (*)(void **, void **))comp_char
 
-#define PRINT_INT print_int
-#define PRINT_CHAR print_char
-#define PRINT_STRING print_string
+#define PRINT_INT (void (*)(void **))print_int
+#define PRINT_CHAR (void (*)(void **))print_char
+#define PRINT_STRING (void (*)(void **))print_string
 
 typedef struct No {
     void *chave;
-    struct No *esq;
     struct No *dir;
+    struct No *esq;
     struct No *p;
 } No;
 
@@ -23,12 +23,22 @@ typedef struct Arvore {
     No *raiz;
 } Arvore;
 
-void insere(Arvore *r, No *no, const int compare(const void **,const void **));
+void inserir(Arvore *arvore, No *no, int (*compare)(void **, void **));
 
-void imprimir(No *raiz, const void print(const void**));
+void remover(Arvore *arvore, No *no);
 
-No* criar_folha(void *valor);
+void transplante(Arvore *arvore, No *u, No *v);
 
-Arvore* criar_arvore();
+void imprimirEmOrdem(No *raiz, void (*print)(void **));
 
-#endif //ARVOREBINARIA_H
+No* criarNo(void *chave);
+
+No* buscar(No *raiz, void *chave, int (*compare)(void **, void **));
+
+No* minimo(No *raiz);
+
+No* maximo(No *raiz);
+
+Arvore* criarArvore();
+
+#endif // ARVOREBINARIA_H_INCLUDED

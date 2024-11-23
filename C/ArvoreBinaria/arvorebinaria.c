@@ -2,52 +2,7 @@
 #include <stdlib.h>
 #include "arvorebinaria.h"
 
-void insere(Arvore *r, No *no, const int compare(const void **, const void **)) 
-{
-    No *current = r->raiz;
-    No *pai = current;
-
-    while (current != NULL) {
-        pai = current;
-
-        if(compare(no->chave, current->chave) == 1)
-            current = current->dir;
-        else
-            current = current->esq;
-    }
-
-    no->p = pai;
-
-    if(pai == NULL)
-        r->raiz = no;
-    else if(compare(no->chave, pai->chave) == 1)
-        pai->dir = no;
-    else
-        pai->esq = no;
-}
-
-void imprimir(No *raiz, const void print(const void **))
-{
-    if(raiz != NULL) {
-        imprimir(raiz->esq, print);
-        print(raiz->chave);
-        imprimir(raiz->dir, print);
-    }
-}
-
-No* criar_folha(void *valor)
-{
-    No *no = (No*)malloc(sizeof(No));
-
-    no->chave = valor;
-    no->dir = NULL;
-    no->esq = NULL;
-
-    return no;
-}
-
-Arvore* criar_arvore()
-{
+Arvore* criarArvore() {
     Arvore *arvore = (Arvore*)malloc(sizeof(Arvore));
 
     arvore->raiz = NULL;
@@ -55,3 +10,105 @@ Arvore* criar_arvore()
     return arvore;
 }
 
+No* criarNo(void *chave) {
+    No *no = (No*)malloc(sizeof(No));
+
+    no->chave = chave;
+    no->dir = NULL;
+    no->esq = NULL;
+    no->p = NULL;
+
+    return no;
+}
+
+No* minimo(No *raiz) {
+    while(raiz->esq != NULL) {
+        raiz = raiz->esq;
+    }
+
+    return raiz;
+}
+
+No* maximo(No *raiz) {
+    while(raiz->dir != NULL) {
+        raiz = raiz->dir;
+    }
+
+    return raiz;
+}
+
+No *buscar(No *raiz, void *chave, int (*compare)(void **, void **)) {
+    if(compare(chave, raiz->chave) == 1) {
+        buscar(raiz->dir, chave, compare);
+    } else if(compare(chave, raiz->chave) == -1) {
+        buscar(raiz->esq, chave, compare);
+    } else {
+        return raiz;
+    }
+}
+
+void inserir(Arvore *arvore, No *no, int (*compare)(void **, void **)) {
+    No *pai = NULL;
+    No *current = arvore->raiz;
+
+    while(current != NULL) {
+        pai = current;
+
+        if(compare(no->chave, current->chave) == 1) {
+            current = current->dir;
+        } else {
+            current = current->esq;
+        }
+    }
+
+    no->p = pai;
+
+    if(pai == NULL) {
+        arvore->raiz = no;
+    } else if(compare(no->chave, pai->chave) == 1) {
+        pai->dir = no;
+    } else {
+        pai->esq = no;
+    }
+}
+
+void transplante(Arvore *arvore, No *u, No *v) {
+    if(u->p == NULL) {
+        arvore->raiz = v;
+    } else if(u == u->p->esq) {
+        u->p->esq = v;
+    } else {
+        u->p->dir = v;
+        if(v != NULL) {
+            v->p = u->p;
+        }
+    }
+}
+
+void remover(Arvore *arvore, No *z) {
+    if(z->esq == NULL) {
+        transplante(arvore, z, z->dir);
+    } else if(z->dir == NULL) {
+        transplante(arvore, z, z->esq);
+    } else {
+        No *y = minimo(z->dir);
+
+        if(y->p != NULL) {
+            transplante(arvore, y, y->dir);
+            y->dir = z->dir;
+            y->dir->p = y;
+        }
+
+        transplante(arvore, z, y);
+        y->esq = z->esq;
+        y->esq->p = y;
+    }
+}
+
+void imprimirEmOrdem(No *raiz, void (*print)(void **)) {
+    if(raiz != NULL) {
+        imprimirEmOrdem(raiz->esq, print);
+        print(raiz->chave);
+        imprimirEmOrdem(raiz->dir, print);
+    }
+}

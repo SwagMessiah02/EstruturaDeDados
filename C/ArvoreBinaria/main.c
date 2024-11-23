@@ -1,22 +1,30 @@
 #include <stdio.h>
 #include "arvorebinaria.h"
 
-#define LENGTH(v) sizeof(v)/sizeof(v[0])
+int main(void) {
+    int vetor[5] = {3, 6, 0, 1, 2};
 
-const int vetor_1[5] = {1,0,5,3,2};
-const char vetor_2[5] = {'d','b','e','f','a'};
-const char* vetor_3[4] = {"Okarun", "Momo", "JiJi", "Vovó Turbo"};
-const int length = LENGTH(vetor_1);
+    Arvore *arvore = criarArvore();
 
-int main(void)
-{
-   Arvore *arvore = criar_arvore();
+    for(int i = 0;i < 5;i++) {
+        inserir(arvore, criarNo(&vetor[i]), INT);
+    }
 
-   for (int i = 0; i < length; i++) {
-      insere(arvore, criar_folha(&vetor_1[i]), INT);
-   }
+    imprimirEmOrdem(arvore->raiz, PRINT_INT);
 
-   imprimir(arvore->raiz, PRINT_INT);
+    int max = *(int*)maximo(arvore->raiz)->chave;
+    int min = *(int*)minimo(arvore->raiz)->chave;
 
-   return 0;
+    printf("\n");
+
+    printf("%d %d\n", max, min);
+
+    // remover(arvore, minimo(arvore->raiz));
+    // remover(arvore, maximo(arvore->raiz));
+
+    remover(arvore, buscar(arvore->raiz, &vetor[2], INT));
+
+    imprimirEmOrdem(arvore->raiz, PRINT_INT);
+
+    return 0;
 }
