@@ -37,7 +37,7 @@ No* maximo(No *raiz) {
     return raiz;
 }
 
-No *buscar(No *raiz, void *chave, int (*compare)(void **, void **)) {
+No* buscar(No *raiz, void *chave, int (*compare)(void **, void **)) {
     if(compare(chave, raiz->chave) == 1) {
         buscar(raiz->dir, chave, compare);
     } else if(compare(chave, raiz->chave) == -1) {
